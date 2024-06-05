@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
     public static PlayerHealth instance;
     public HealthBar healthBar;
 
+    private SpriteRenderer sr;
+
     private void Awake()
     {
         instance = this;
@@ -22,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(currentHealth);
-
+        sr = GetComponent<SpriteRenderer>(); 
 
     }
 
@@ -36,6 +38,8 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= damageAmount;
         healthBar.SetHealth(currentHealth);
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.6f);
+        StartCoroutine(ResetAfterDelay());
 
         if(currentHealth <=0)
         {
@@ -43,4 +47,13 @@ public class PlayerHealth : MonoBehaviour
         }
 
     }
+
+    IEnumerator ResetAfterDelay()
+    {
+        yield return new WaitForSeconds(1);
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
+
+    }
+
+
 }

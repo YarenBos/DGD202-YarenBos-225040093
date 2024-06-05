@@ -9,11 +9,19 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth;
     public int damageAmount;
 
+    public static PlayerHealth instance;
+    public HealthBar healthBar;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(currentHealth);
 
 
     }
@@ -26,7 +34,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void DealDamage()
     {
-        currentHealth -= damageAmount; 
+        currentHealth -= damageAmount;
+        healthBar.SetHealth(currentHealth);
 
         if(currentHealth <=0)
         {

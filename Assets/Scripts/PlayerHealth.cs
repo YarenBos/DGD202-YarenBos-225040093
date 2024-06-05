@@ -14,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
 
     private SpriteRenderer sr;
 
+    private Vector2 checkPoint;
+
     private void Awake()
     {
         instance = this;
@@ -24,7 +26,9 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(currentHealth);
-        sr = GetComponent<SpriteRenderer>(); 
+        sr = GetComponent<SpriteRenderer>();
+
+        checkPoint = transform.position;
 
     }
 
@@ -43,9 +47,14 @@ public class PlayerHealth : MonoBehaviour
 
         if(currentHealth <=0)
         {
-            gameObject.SetActive(false);
+            Respawn();
         }
 
+    }
+
+    public void UpdatedCheckPoint(Vector2 pos)
+    {
+        checkPoint = pos;
     }
 
     IEnumerator ResetAfterDelay()
@@ -55,5 +64,12 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
+    public void Respawn()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth);
+        transform.position = checkPoint;
+
+    }
 
 }

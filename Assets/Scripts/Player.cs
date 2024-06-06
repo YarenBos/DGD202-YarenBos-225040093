@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            AudioManager.instance.PlaySFX(2);
         }
 
         anim.SetBool("OnGround",isGrounded);

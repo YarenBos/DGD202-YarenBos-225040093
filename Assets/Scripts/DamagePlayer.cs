@@ -21,6 +21,7 @@ public class DamagePlayer : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             PlayerHealth.instance.DealDamage();
+            AudioManager.instance.PlaySFX(1);
         }
     }
 

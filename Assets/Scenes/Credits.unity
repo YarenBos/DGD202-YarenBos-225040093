@@ -327,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &303582118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -443,8 +443,8 @@ MonoBehaviour:
     Hatice Bahar Toprak\n\n\n                                                        
     Sources\n\n\n\n     Assets:                  Giorgi Luarsabishvili 2D Runner
     Game in Unity Course\n\n     Code:                    Giorgi Luarsabishvili 2D
-    Runner Game in Unity Course \n\n     Sound Effects:      Giorgi Luarsabishvili
-    2D Runner Game in Unity Course"
+    Runner Game in Unity Course \n\n     Sound Effects\n       and Music:         
+    Giorgi Luarsabishvili 2D Runner Game in Unity Course"
 --- !u!222 &1089358419
 CanvasRenderer:
   m_ObjectHideFlags: 0

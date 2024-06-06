@@ -16,6 +16,13 @@ public class Player : MonoBehaviour
 
     private Animator anim;
 
+    private bool canDash = true;
+    private bool isDashing;
+    public float dashingPower = 15f;
+    public float dashingTime = 0.2f;
+    public float dashingCooldown = 1.5f;
+    public TrailRenderer tr;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +35,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayers);
 
         rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(Dash());
+        }
+
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -41,4 +59,22 @@ public class Player : MonoBehaviour
         anim.SetBool("OnGround",isGrounded);
 
     }
+
+    IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        rb.velocity = new Vector2(dashingPower, 0f);
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
+
 }
